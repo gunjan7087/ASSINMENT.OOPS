@@ -1,0 +1,134 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Account {
+    int id;
+    string password;
+    double balance;
+};
+
+Account accounts[100];
+int accountCount = 0;
+
+void printIntroMenu() {
+    cout << "Please select an option from the menu below:\n"
+         << "l -> Login\n"
+         << "c -> Create New Account\n"
+         << "q -> Quit\n"
+         << "> ";
+}
+
+void printMainMenu() {
+    cout << "d -> Deposit Money\n"
+         << "w -> Withdraw Money\n"
+         << "r -> Request Balance\n"
+         << "q -> Quit\n"
+         << "> ";
+}
+
+void start() {
+    char choice;
+    printIntroMenu();
+    cin >> choice;
+    while (choice != 'q') {
+        switch (choice) {
+            case 'l':
+              void  login ();
+                break;
+            case 'c':
+              void  createAccount();
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+                printIntroMenu();
+                cin >> choice;
+                break;
+        }
+    }
+}
+
+void login() {
+    int id;
+    string password;
+    bool found = false;
+    cout << "Please enter your user id: ";
+    cin >> id;
+    cout << "Please enter your password: ";
+    cin >> password;
+    for (int i = 0; i < accountCount; i++) {
+        if (accounts[i].id == id && accounts[i].password == password) {
+            found = true;
+            break;
+        }
+    }
+    if (found) {
+        cout << "Access Granted!\n";
+        printMainMenu();
+        char choice;
+        cin >> choice;
+        while (choice != 'q') {
+            switch (choice) {
+                case 'd':
+                    double depositAmount;
+                    cout << "Amount of deposit: $";
+                    cin >> depositAmount;
+                    accounts[id - 1].balance += depositAmount;
+                    cout << "Deposit successful. Your new balance is $" << accounts[id - 1].balance << ".\n";
+                    printMainMenu();
+                    cin >> choice;
+                    break;
+                case 'w':
+                    double withdrawalAmount;
+                    cout << "Amount of withdrawal: $";
+                    cin >> withdrawalAmount;
+                    if (accounts[id - 1].balance >= withdrawalAmount) {
+                        accounts[id - 1].balance -= withdrawalAmount;
+                        cout << "Withdrawal successful. Your new balance is $" << accounts[id - 1].balance << ".\n";
+                    } else {
+                        cout << "Insufficient balance.\n";
+                    }
+                    printMainMenu();
+                    cin >> choice;
+                    break;
+                case 'r':
+                    cout << "Your balance is $" << accounts[id - 1].balance << ".\n";
+                    printMainMenu();
+                    cin >> choice;
+                    break;
+                default:
+                    cout << "Invalid choice. Please try again.\n";
+                    printMainMenu();
+                    cin >> choice;
+                    break;
+            }
+        }
+    } else {
+        cout << "******** LOGIN FAILED! ********\n";
+        printIntroMenu();
+        char choice;
+        cin >> choice;
+    }
+}
+
+void createAccount() {
+    int id;
+    string password;
+    cout << "Please enter your user name: ";
+    cin >> id;
+    cout << "Please enter your password: ";
+    cin >> password;
+    accounts[accountCount].id = id;
+    accounts[accountCount].password = password;
+    accounts[accountCount].balance = 0;
+    accountCount++;
+    cout << "Thank You! Your account has been created!\n";
+    printIntroMenu();
+    char choice;
+    cin >> choice;
+}
+
+int main() {
+    start();
+}
