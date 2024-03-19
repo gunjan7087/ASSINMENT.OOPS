@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+class TicTacToe {
+    private: char board[3][3]; 
+	         
+
+    public: char currentPlayer;
+	
+	TicTacToe() { 
+        for (int i = 0; i < 3; i++) { 
+            for (int j = 0; j < 3; j++) { 
+			    board[i][j] = ' '; 
+		} 
+	} currentPlayer = 'O'; } 
+	
+    void printBoard() { 
+	    for (int i = 0; i < 3; i++) { 
+            for (int j = 0; j < 3; j++) { 
+            cout << board[i][j] << " "; 
+	} 
+	cout << endl; 
+	   }
+    } 
+	    bool makeMove(int row, int col) { 
+	        if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ') { 
+			cout << "Invalid move. Please try again." << endl; 
+			return false; 
+		} 
+			board[row][col] = currentPlayer; 
+			if (checkWin(currentPlayer)) { 
+			cout << "Player " << currentPlayer << " wins!" << endl; 
+			return true; 
+		} 
+			currentPlayer = (currentPlayer == 'O') ? 'X' : 'O'; 
+			return false; }
+			
+			 bool checkWin(char player) { 
+		
+			for (int i = 0; i < 3; i++) { 
+			if (board[i][0] == player && board[i][1] == player && board[i][2] == player) return true; 
+			if (board[0][i] == player && board[1][i] == player && board[2][i] == player) return true; 
+			} 
+			if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return true; 
+			if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return true; return false;
+	 }
+};
+
+    int main() { TicTacToe game; int row, col; 
+        cout << "Tic Tac Toe Game" << endl; 
+		cout << "Player 1: 'O'" << endl; 
+		cout << "Player 2: 'X'" << endl; 
+		cout << endl; while (true) { game.printBoard();
+		cout << "Player " << game.currentPlayer << "enter your move (row col): ";
+		cin >> row >> col; if (game.makeMove(row, col)) break; std::cout << endl; } 
+		game.printBoard(); 
+		return 0;
+}
