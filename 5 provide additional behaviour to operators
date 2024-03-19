@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class User {
+    private: string name; 
+    int birth_year; 
+    int birth_day; 
+    int birth_month; 
+    
+
+    public: 
+	double salary;
+	User() {
+    }  
+	void input() { 
+	
+    cout << "Enter name: "; 
+    getline(cin >> ws, name); 
+    cout << "Enter birth year: "; 
+    cin >> birth_year; 
+    cout << "Enter birth day: "; 
+    cin >> birth_day; 
+    cout << "Enter birth month: "; 
+    cin >> birth_month; 
+	cout << "Enter salary: "; 
+	cin >> salary; 
+	} 
+	int compareAge(const User& other) 
+	const { if (birth_year == other.birth_year) { 
+	if (birth_month == other.birth_month) { 
+	if (birth_day == other.birth_day) { 
+	return 0; 
+	} 
+	return birth_day < other.birth_day ? -1 : 1; 
+	} 
+	return birth_month < other.birth_month ? -1 : 1; 
+	} 
+	return birth_year < other.birth_year ? -1 : 1; 
+	} 
+	double operator+(const User& other) 
+	const { return (salary + other.salary) / 2.0; 
+	} 
+	User operator+(double increment) const { 
+	User user = *this; user.salary += user.salary * (increment / 100.0); return user; 
+	}
+};
+
+	int main() { 
+	User user1, user2; 
+	cout << "Enter details of user1: " <<endl; 
+	user1.input(); 
+	cout << "Enter details of user2: " <<endl; 
+	user2.input(); 
+	int result = user1.compareAge(user2); 
+	cout << "Comparison Result: " << result <<endl; 
+	double average_sal = user1 + user2; 
+	cout << "Average Salary: " << average_sal <<endl; 
+	User user1_incremented = 5+ user1; 
+	cout << "User 1 Incremented Salary: " << user1_incremented.salary <<endl; 	
+	User user2_incremented = 10 + user2; 
+	cout << "User 2 Incremented Salary: " << user2_incremented.salary <<endl; 
+	return 0;
+}
