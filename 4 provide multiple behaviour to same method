@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class computation {
+public:
+    int compute(int x, int y) {
+        return x + y;
+    }
+
+    float compute(int num, float decimal) {
+        return num + decimal;
+    }
+
+    double compute(int num, double decimal) {
+        return num + decimal;
+    }
+
+    int compute(char ch1, char ch2) {
+        return static_cast<int>(ch1 + ch2);
+    }
+
+    int compute(char ch, int num) {
+        return static_cast<int>(ch) + num;
+    }
+
+    int compute() {
+        return 0;
+    }
+};
+
+int main() {
+    computation calc;
+
+    int result1 = calc.compute(5, 10);
+    cout << "Result 1: " << result1 << endl;
+
+    float result2 = calc.compute(5, 3.14f);
+    cout << "Result 2: " << result2 << endl;
+
+    double result3 = calc.compute(5, 3.14);
+    cout << "Result 3: " << result3 << endl;
+
+    int result4 = calc.compute('A', 'B');
+    cout << "Result 4: " << result4 << endl;
+
+    int result5 = calc.compute('A', 10);
+    cout << "Result 5: " << result5 << endl;
+
+    int result6 = calc.compute();
+    cout << "Result 6: " << result6 << endl;
+
+    return 0;
+}
