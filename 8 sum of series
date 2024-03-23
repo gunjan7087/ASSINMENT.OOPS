@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int sumOfSeries(int n) {
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        int term = 0;
+        for (int j = 1; j <= i; j++) {
+            term += j;
+        }
+        sum += term;
+    }
+    return sum;
+}
+
+int main() {
+    int n;
+    cout << "Enter a positive integer: ";
+    cin >> n;
+    cout << "Sum of series: " << sumOfSeries(n) <<endl;
+    return 0;
+}
