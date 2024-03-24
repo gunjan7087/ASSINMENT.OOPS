@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+struct Book { 
+
+    char title[100]; char author[100]; char isbn[20];
+};
+
+void searchBook(const Book books[], int numBooks, const char* inputIsbn) { 
+
+    int found = 0; for (int i = 0; i < numBooks; i++) { 
+
+    if (strcmp(books[i].isbn, inputIsbn) == 0) { 
+
+    cout << "Book Title: " << books[i].title << endl; 
+
+    cout << "Author: " << books[i].author << endl; 
+
+    found = 1; break; 
+    } 
+} 
+    if (found == 0) { 
+    cout << "The book is not available in the library." << endl; 
+}
+
+}
+int main() { 
+Book library[3]; 
+}
