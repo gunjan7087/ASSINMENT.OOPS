@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+
+class Number {
+
+public:
+	int num ;
+    Number(int n) : num(n) {}
+
+    friend Number operator+(const Number& n1, const Number& n2);
+};
+
+Number operator+(const Number& n1, const Number& n2) {
+    Number res(n1.num + n2.num);
+    return res;
+}
+
+int main() {
+    Number a(10), b(20), c(30);
+
+    Number res1 = a + b;
+    Number res2 = b + c;
+
+    cout << "Result1: " << res1.num << endl;
+    cout << "Result2: " << res2.num << endl;
+
+    return 0;
+}
