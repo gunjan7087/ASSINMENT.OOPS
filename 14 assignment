@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+class Item {
+public:
+    Item(const char* name) : name(name) {}
+   
+
+    const char* getName() const { return name; }
+ double getPrice() const = 0; function
+
+private:
+    const char* name;
+};
+
+class Starter : public Item {
+public:
+    Starter(const char* name, double price) : Item(name), p(price) {}
+
+    double getPrice() const override { return price; }
+
+private:
+    double price;
+};
+
+class MainCourse : public Item {
+public:
+    MainCourse(const char* name, double price) : Item(name), price(price) {}
+
+    double getPrice() const override { return price; }
+
+private:
+    double price;
+};
+
+int main() {
+   
+    Starter starter1("Starter 1", 5.5);
+    Starter starter2("Starter 2", 6.0);
+    MainCourse mainCourse1("Main Course 1", 12.5);
+    MainCourse mainCourse2("Main Course 2", 15.0);
+
+    Item* items[] = {&starter1, &starter2, &mainCourse1, &mainCourse2};
+    const size_t itemCount = size(items);
+
+    double totalBill = 0.0;
+
+    // Calculate the total bill
+    for (size_t i = 0; i < itemCount; ++i) {
+        totalBill += items[i]->getPrice();
+    }
+
+    cout << "Total bill: $" << totalBill << endl;
+
+    return 0;
+}
